@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, MainActivity!</string>
-    <string name="app_name">mnogashki</string>
-
+    <string name="app_name">Mnogashki</string>
+    
+	<string name="finished_title">Congratulations!</string>
+    <string name="finished_message">You have solved the puzzle in %1$s steps!</string>
+    <string name="shuffle">Shuffle</string>
+	
+	<string name="menu_shuffle">Shuffle</string>
+	<string name="menu_preferenes">Settings</string>
+	
+	<string name="steps">Steps:</string>
+	
 </resources>

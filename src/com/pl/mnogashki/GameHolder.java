@@ -6,8 +6,8 @@ public class GameHolder
 {
 	private static Game _game;
 	
-	public static Game getGame(){
-		if (_game == null)
+	public static Game getGame(boolean forceNew){
+		if (_game == null || forceNew)
 			constructGame();	
 			
 		return _game;
@@ -56,5 +56,7 @@ public class GameHolder
 			
 			i++;
 		}
+		
+		game.steps = 0;
 	}
 }
