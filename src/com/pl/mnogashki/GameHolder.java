@@ -1,22 +1,29 @@
 package com.pl.mnogashki;
 import java.util.*;
 import android.graphics.*;
+import android.content.*;
+import android.preference.*;
+import android.app.*;
 
 public class GameHolder
 {
 	private static Game _game;
 	
-	public static Game getGame(boolean forceNew){
+	public static Game getGame(Activity activity, boolean forceNew){
 		if (_game == null || forceNew)
-			constructGame();	
+			constructGame(activity);
 			
 		return _game;
 	}
 	
-	private static void constructGame(){
+	private static void constructGame(Activity activity){
+		final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+		
 		_game = new Game();
-		_game.vsize = 4;
-		_game.hsize = 4;
+
+		_game.vsize = Integer.parseInt(sharedPrefs.getString(PrefsActivity.KEY_VERT, "4"));
+		_game.hsize = Integer.parseInt(sharedPrefs.getString(PrefsActivity.KEY_HORZ, "4"));;
+		
 		_game.field = new int[_game.vsize][_game.hsize];
 		for (int r = 0; r <_game.vsize; r++){
 			for (int c = 0; c<_game.hsize; c++){

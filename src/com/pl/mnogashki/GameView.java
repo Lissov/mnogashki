@@ -35,7 +35,7 @@ public class GameView extends View
 	public GameView(Activity context){
 		super(context);
 		_context = context;
-		game = GameHolder.getGame(false);
+		game = GameHolder.getGame(_context, false);
 		
 		Resources r = _context.getResources();
 		pntBackground.setColor(r.getColor(R.color.background));
@@ -199,7 +199,7 @@ public class GameView extends View
 	}
 	
 	public void shuffle(){
-		game = GameHolder.getGame(true);
+		game = GameHolder.getGame(_context, true);
 		this.invalidate();
 	}
 	
