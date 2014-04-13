@@ -3,21 +3,20 @@ import java.util.*;
 import android.graphics.*;
 import android.content.*;
 import android.preference.*;
-import android.app.*;
 
 public class GameHolder
 {
 	private static Game _game;
 	
-	public static Game getGame(Activity activity, boolean forceNew){
+	public static Game getGame(Context context, boolean forceNew){
 		if (_game == null || forceNew)
-			constructGame(activity);
+			constructGame(context);
 			
 		return _game;
 	}
 	
-	private static void constructGame(Activity activity){
-		final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+	private static void constructGame(Context context){
+		final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		
 		_game = new Game();
 

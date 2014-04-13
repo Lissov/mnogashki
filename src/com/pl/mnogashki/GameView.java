@@ -2,14 +2,13 @@ package com.pl.mnogashki;
 import android.view.*;
 import android.app.*;
 import android.graphics.*;
-import android.widget.*;
 import android.content.*;
 import java.util.*;
 import android.content.res.*;
 
 public class GameView extends View
 {
-	private Activity _context;
+	private Context _context;
 	
 	private Paint pntBackground = new Paint();
 	private Paint pntBorder = new Paint();
@@ -32,9 +31,9 @@ public class GameView extends View
 	private Game game;
 	private static Timer _timer;
 	
-	public GameView(Activity context){
+	public GameView(Context context){
 		super(context);
-		_context = context;
+		_context = (Activity)context;
 		game = GameHolder.getGame(_context, false);
 		
 		Resources r = _context.getResources();
@@ -54,14 +53,16 @@ public class GameView extends View
 		if (_timer != null)
 			_timer.cancel();
 			
-		_timer = new Timer();
-		_timer.schedule(new TimerTask(){
-			public void run(){
-				_context.runOnUiThread(new Runnable(){
+		if (_context instanceof Activity){
+			_timer = new Timer();
+			_timer.schedule(new TimerTask(){
+				public void run(){
+					((Activity)_context).runOnUiThread(new Runnable(){
 						public void run(){automove();}
-				});
-			}
-		}, 500, 40);
+					});
+				}
+			}, 500, 40);
+		}
 	}
 
 	private float beginX;
@@ -219,6 +220,7 @@ public class GameView extends View
 		blockplace = szw / game.hsize;
 	}
 
+	private RectF rect = new RectF(); // reusable object for drawing
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
@@ -249,7 +251,11 @@ public class GameView extends View
 		for (int n = 0; n < positions.length; n++){
 			float l = left + pad + positions[n].col*blockplace;
 			float t = top + pad + positions[n].row*blockplace;
-			RectF rect = new RectF(l, t, l + blocksize, t + blocksize);
+			//RectF rect = new RectF(l, t, l + blocksize, t + blocksize);
+			rect.left = l;
+			rect.top = t;
+			rect.right = l + blocksize;
+			rect.bottom = t + blocksize;
 			canvas.drawRoundRect(rect, rad, rad, 
 					positions[n].active ? pntBlockFA : pntBlockF);
 			canvas.drawRoundRect(rect, rad, rad, pntBlockB);
