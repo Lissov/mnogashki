@@ -224,7 +224,7 @@ public class GameView extends View
 	{
 		calcGeometry(canvas);
 		
-		canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pntBackground);
+		//canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pntBackground);
 		
 		float bt = szw * Constants.Sizes.BorderThickness;
 		canvas.drawRect(left - bt, top - bt, left, top + szh + bt, pntBorder);
@@ -255,7 +255,7 @@ public class GameView extends View
 			canvas.drawRoundRect(rect, rad, rad, pntBlockB);
 			String txt = "" + (n + 1);
 			float tw = pntBlockN.measureText(txt);
-			canvas.drawText(txt, l + (blocksize - tw) / 2, t + (2*blocksize - th) / 2, pntBlockN);
+			canvas.drawText(txt, l + (blocksize - tw) / 2, t + (1.9f*blocksize - th) / 2, pntBlockN);
 		}
 	}
 	
