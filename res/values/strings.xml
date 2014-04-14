@@ -14,5 +14,6 @@
 	
 	<string name="prefs_size_h">Field size horizontal</string>
 	<string name="prefs_size_v">Field size vertical</string>
-	
+	<string name="prefs_size">Field size (overall)</string>
+	<string name="prefs_size_custom">Custom</string>
 </resources>

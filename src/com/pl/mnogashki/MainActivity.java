@@ -5,6 +5,7 @@ import android.os.*;
 import android.view.*;
 import android.widget.*;
 import android.content.*;
+import android.preference.*;
 
 public class MainActivity extends Activity
 {
@@ -25,6 +26,27 @@ public class MainActivity extends Activity
 		llMain.addView(gameView);
     }
 
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		
+		if (PrefsActivity.changed){
+			final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+			
+			int v = Integer.parseInt(sharedPrefs.getString(PrefsActivity.KEY_VERT, "4"));
+			int h = Integer.parseInt(sharedPrefs.getString(PrefsActivity.KEY_HORZ, "4"));;
+			
+			Game g = GameHolder.getGame(this, false);
+			if (g.vsize != v || g.hsize != h)
+			{
+				gameView.shuffle();
+			}
+			
+			PrefsActivity.changed = false;
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
